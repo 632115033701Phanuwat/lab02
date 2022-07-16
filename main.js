@@ -3,8 +3,10 @@ const app = Vue.createApp({
         return {
             cart: [0,0],
             premium: true
+
         }
     },
+
     methods: {
         updateCart(id) {
             if (id==2234) {

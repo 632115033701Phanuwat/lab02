@@ -32,7 +32,6 @@ app.component ('product-display',{
                 v-on:click="addToCart">
                 Add to Cart
                 </button>
-
                 <button
                 class="button"
                 v-on:click="removeFromCart">
@@ -40,19 +39,30 @@ app.component ('product-display',{
                 </button>
             </div>
         </div>
+        <review-list v-if="reviews.length" :reviews="reviews"></review-list>
+        <review-form @review-submitted="addReview"></review-form>
     </div>`,
     data() {
         return {
             product: 'Shoes',
             brand: 'SE 331',
+
             inventory: 100,
             details: ['50% cotton', '30% wool', '20% polyester'],
             variants: [
-                { id: 2234, color: 'green', image: './assets/images/socks_green.jpg', quantity: 50 },
-                { id: 2235, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0 }
+                { id: 2234, 
+                color: 'green', 
+                image: './assets/images/socks_green.jpg', 
+                quantity: 50 },
+                { id: 2235,  
+                color: 'blue', 
+                image: './assets/images/socks_blue.jpg', 
+                quantity: 50 }
             ],
             activeClass: true,
             selectedVariant:0,
+            reviews:[]
+
         }
     },
      methods: {
@@ -67,7 +77,9 @@ app.component ('product-display',{
         },
         removeFromCart() {
             this.$emit('remove-from-cart')
-
+        },
+        addReview(review) {
+            this.reviews.push(review)
         }
     },
     computed: {
@@ -87,5 +99,6 @@ app.component ('product-display',{
             return 30
         }
     }
+
    
 })
